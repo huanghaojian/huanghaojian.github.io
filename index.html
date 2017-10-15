@@ -316,7 +316,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/15/mosquitto安装配置-paho-mqtt-spy安装/" itemprop="url">mosquitto安装配置,paho.mqtt-spy安装</a></h1>
+                <a class="post-title-link" href="/2017/10/15/mosquitto安装配置-paho-mqtt-spy安装/" itemprop="url">mosquitto安装、配置、测试、paho.mqtt-spy安装</a></h1>
         
 
         <div class="post-meta">
@@ -381,8 +381,8 @@
 <h2 id="发布-mosquitto-pub-t-m-u-P"><a href="#发布-mosquitto-pub-t-m-u-P" class="headerlink" title="发布 mosquitto_pub -t  -m   -u  -P "></a>发布 mosquitto_pub -t <topic> -m <message>  -u <username> -P <password></password></username></message></topic></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mosquitto_pub -t mqtt -m message  -u hao -P 123456</div></pre></td></tr></table></figure>
 <h1 id="七-paho-mqtt-spy图形化界面测试"><a href="#七-paho-mqtt-spy图形化界面测试" class="headerlink" title="(七) paho.mqtt-spy图形化界面测试"></a>(七) <a href="https://github.com/eclipse/paho.mqtt-spy" target="_blank" rel="external">paho.mqtt-spy</a>图形化界面测试</h1><p>下载连接 <a href="https://github.com/eclipse/paho.mqtt-spy/releases/download/1.0.1-beta5/mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar" target="_blank" rel="external">https://github.com/eclipse/paho.mqtt-spy/releases/download/1.0.1-beta5/mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar</a></p>
 <h2 id="启动paho-mqtt-spy"><a href="#启动paho-mqtt-spy" class="headerlink" title="启动paho.mqtt-spy"></a>启动paho.mqtt-spy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar</div></pre></td></tr></table></figure>
-<p><img src="https://blog.linoxide.com/wp-content/uploads/2016/12/mqtt-spy.png" alt="paho.mqtt-spy" title="paho.mqtt-spy"></p>
-<p><img src="https://blog.linoxide.com/wp-content/uploads/2016/12/mqtt2.png" alt="paho.mqtt-spy security" title="paho.mqtt-spy"></p>
+<p><img src="https://static.oschina.net/uploads/img/201710/15095507_kkce.png" alt="paho.mqtt-spy" title="paho.mqtt-spy"></p>
+<p><img src="https://static.oschina.net/uploads/img/201710/15095608_5WNb.png" alt="paho.mqtt-spy security" title="paho.mqtt-spy"></p>
 <h1 id="八-创建paho-mqtt-spy桌面图标"><a href="#八-创建paho-mqtt-spy桌面图标" class="headerlink" title="(八) 创建paho.mqtt-spy桌面图标"></a>(八) 创建paho.mqtt-spy桌面图标</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim ~/.local/share/applications/mqtt-spy.desktop</div><div class="line"># 添加以下内容</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[Desktop Entry]</div><div class="line">Version=1.0</div><div class="line">Name=mqtt-spy</div><div class="line">Comment=mqtt-spy</div><div class="line">Type=Application</div><div class="line">Categories=Development;</div><div class="line">Exec=java -jar 安装目录/paho.mqtt-spy/jar/mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar</div><div class="line">Terminal=false</div><div class="line">Icon=安装目录/paho.mqtt-spy/mqtt-spy/src/main/resources/ui/images/mqtt-spy-logo.png</div></pre></td></tr></table></figure>
           
