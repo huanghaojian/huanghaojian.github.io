@@ -146,7 +146,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://static.oschina.net/uploads/img/201710/15095507_kkce.png">
 <meta property="og:image" content="https://static.oschina.net/uploads/img/201710/17192230_TFzz.png">
-<meta property="og:updated_time" content="2017-10-17T11:24:42.023Z">
+<meta property="og:updated_time" content="2017-10-23T12:20:18.327Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mosquitto安装、配置、测试、paho.mqtt-spy安装">
 <meta name="twitter:description" content="mosquitto是一款实现了消息推送协议 MQTT v3.1 的开源消息代理软件，提供轻量级的，支持可发布/可订阅的的消息推送模式，使设备对设备之间的短消息通信变得简单，比如现在应用广泛的低功耗传感器，手机、嵌入式计算机、微型控制器等移动设备。  (一) Ubuntu 安装 mosquitto1234apt-add-repository ppa:mosquitto-dev/mosquitto-">
@@ -261,22 +261,22 @@
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
           <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -433,7 +433,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  487
+                  494
                 </span>
               
 
@@ -464,7 +464,7 @@
 <h1 id="一-Ubuntu-安装-mosquitto"><a href="#一-Ubuntu-安装-mosquitto" class="headerlink" title="(一) Ubuntu 安装 mosquitto"></a>(一) Ubuntu 安装 mosquitto</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">apt-add-repository ppa:mosquitto-dev/mosquitto-ppa</div><div class="line">apt-get update</div><div class="line">apt-get install mosquitto</div><div class="line">apt-get install mosquitto-clients</div></pre></td></tr></table></figure>
 <h1 id="二-修改-etc-mosquitto-mosquitto-conf"><a href="#二-修改-etc-mosquitto-mosquitto-conf" class="headerlink" title="(二) 修改/etc/mosquitto/mosquitto.conf"></a>(二) 修改/etc/mosquitto/mosquitto.conf</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pid_file /var/run/mosquitto.pid</div><div class="line"></div><div class="line">persistence true</div><div class="line">persistence_location /var/lib/mosquitto/</div><div class="line"></div><div class="line">log_dest file /var/log/mosquitto/mosquitto.log</div><div class="line"></div><div class="line"># 将其他配置配置到此处方便管理</div><div class="line">include_dir /etc/mosquitto/conf.d</div></pre></td></tr></table></figure>
 <h1 id="三-mosquitto配置文件-详细参考"><a href="#三-mosquitto配置文件-详细参考" class="headerlink" title="(三) mosquitto配置文件[详细参考]"></a>(三) mosquitto配置文件<a href="https://my.oschina.net/hhjian/blog/1550435" target="_blank" rel="external">[详细参考]</a></h1><h2 id="安全配置-etc-mosquitto-conf-d-security-conf"><a href="#安全配置-etc-mosquitto-conf-d-security-conf" class="headerlink" title="安全配置 (/etc/mosquitto/conf.d/security.conf)"></a>安全配置 (/etc/mosquitto/conf.d/security.conf)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># =================================================================</div><div class="line"># Security</div><div class="line"># =================================================================</div><div class="line"># 禁止匿名用户访问</div><div class="line">allow_anonymous false</div><div class="line"></div><div class="line"># 用户密码配置文件,路径为绝对路径</div><div class="line">password_file /etc/mosquitto/pwdfile.example</div><div class="line"></div><div class="line"># 访问规则列表</div><div class="line">acl_file /etc/mosquitto/aclfile.example</div></pre></td></tr></table></figure>
-<h2 id="acl-file-etc-mosquitto-aclfile-example"><a href="#acl-file-etc-mosquitto-aclfile-example" class="headerlink" title="acl_file (/etc/mosquitto/aclfile.example)"></a>acl_file (/etc/mosquitto/aclfile.example)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 用户限制</div><div class="line">user &lt;username&gt;</div><div class="line"># 用户可以访问的topic和权限</div><div class="line">topic [read|write] &lt;topic&gt;</div></pre></td></tr></table></figure>
+<h2 id="访问规则列表配置-etc-mosquitto-aclfile-example"><a href="#访问规则列表配置-etc-mosquitto-aclfile-example" class="headerlink" title="访问规则列表配置 (/etc/mosquitto/aclfile.example)"></a>访问规则列表配置 (/etc/mosquitto/aclfile.example)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 用户限制</div><div class="line">user &lt;username&gt;</div><div class="line"># 用户可以访问的topic和权限</div><div class="line">topic [read|write] &lt;topic&gt;</div></pre></td></tr></table></figure>
 <h1 id="四-新建用户"><a href="#四-新建用户" class="headerlink" title="(四) 新建用户"></a>(四) 新建用户</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 用户格式为&lt;username&gt;:&lt;password&gt;</div><div class="line"># 第一次创建用户,再次创建会覆盖原文件</div><div class="line">mosquitto_passwd -c /etc/mosquitto/pwdfile.example &lt;userName&gt;</div><div class="line"># 新增用户</div><div class="line">mosquitto_passwd -U /etc/mosquitto/pwdfile.example &lt;userName&gt;</div></pre></td></tr></table></figure>
 <h1 id="五-启动服务"><a href="#五-启动服务" class="headerlink" title="(五) 启动服务"></a>(五) 启动服务</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service mosquitto start</div><div class="line">or</div><div class="line">mosquitto -c /etc/mosquitto/mosquitto.conf -d</div></pre></td></tr></table></figure>
 <h1 id="六-终端测试"><a href="#六-终端测试" class="headerlink" title="(六) 终端测试"></a>(六) 终端测试</h1><h2 id="订阅-mosquitto-sub-t-u-P"><a href="#订阅-mosquitto-sub-t-u-P" class="headerlink" title="订阅 mosquitto_sub -t  -u  -P "></a>订阅 mosquitto_sub -t <topic> -u <username> -P <password></password></username></topic></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mosquitto_sub -t mqtt   -u hao -P 123456</div></pre></td></tr></table></figure>
@@ -519,6 +519,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/23/pip安装/" rel="prev" title="pip安装">
+                pip安装 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -599,12 +603,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
@@ -612,7 +625,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -661,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-Ubuntu-安装-mosquitto"><span class="nav-number">1.</span> <span class="nav-text">(一) Ubuntu 安装 mosquitto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-修改-etc-mosquitto-mosquitto-conf"><span class="nav-number">2.</span> <span class="nav-text">(二) 修改/etc/mosquitto/mosquitto.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-mosquitto配置文件-详细参考"><span class="nav-number">3.</span> <span class="nav-text">(三) mosquitto配置文件[详细参考]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全配置-etc-mosquitto-conf-d-security-conf"><span class="nav-number">3.1.</span> <span class="nav-text">安全配置 (/etc/mosquitto/conf.d/security.conf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#acl-file-etc-mosquitto-aclfile-example"><span class="nav-number">3.2.</span> <span class="nav-text">acl_file (/etc/mosquitto/aclfile.example)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-新建用户"><span class="nav-number">4.</span> <span class="nav-text">(四) 新建用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-启动服务"><span class="nav-number">5.</span> <span class="nav-text">(五) 启动服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-终端测试"><span class="nav-number">6.</span> <span class="nav-text">(六) 终端测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#订阅-mosquitto-sub-t-u-P"><span class="nav-number">6.1.</span> <span class="nav-text">订阅 mosquitto_sub -t  -u  -P </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-mosquitto-pub-t-m-u-P"><span class="nav-number">6.2.</span> <span class="nav-text">发布 mosquitto_pub -t  -m   -u  -P </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-paho-mqtt-spy图形化界面测试"><span class="nav-number">7.</span> <span class="nav-text">(七) paho.mqtt-spy图形化界面测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动paho-mqtt-spy"><span class="nav-number">7.1.</span> <span class="nav-text">启动paho.mqtt-spy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-创建paho-mqtt-spy桌面图标"><span class="nav-number">8.</span> <span class="nav-text">(八) 创建paho.mqtt-spy桌面图标</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-Ubuntu-安装-mosquitto"><span class="nav-number">1.</span> <span class="nav-text">(一) Ubuntu 安装 mosquitto</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-修改-etc-mosquitto-mosquitto-conf"><span class="nav-number">2.</span> <span class="nav-text">(二) 修改/etc/mosquitto/mosquitto.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-mosquitto配置文件-详细参考"><span class="nav-number">3.</span> <span class="nav-text">(三) mosquitto配置文件[详细参考]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全配置-etc-mosquitto-conf-d-security-conf"><span class="nav-number">3.1.</span> <span class="nav-text">安全配置 (/etc/mosquitto/conf.d/security.conf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问规则列表配置-etc-mosquitto-aclfile-example"><span class="nav-number">3.2.</span> <span class="nav-text">访问规则列表配置 (/etc/mosquitto/aclfile.example)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-新建用户"><span class="nav-number">4.</span> <span class="nav-text">(四) 新建用户</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-启动服务"><span class="nav-number">5.</span> <span class="nav-text">(五) 启动服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-终端测试"><span class="nav-number">6.</span> <span class="nav-text">(六) 终端测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#订阅-mosquitto-sub-t-u-P"><span class="nav-number">6.1.</span> <span class="nav-text">订阅 mosquitto_sub -t  -u  -P </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-mosquitto-pub-t-m-u-P"><span class="nav-number">6.2.</span> <span class="nav-text">发布 mosquitto_pub -t  -m   -u  -P </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-paho-mqtt-spy图形化界面测试"><span class="nav-number">7.</span> <span class="nav-text">(七) paho.mqtt-spy图形化界面测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动paho-mqtt-spy"><span class="nav-number">7.1.</span> <span class="nav-text">启动paho.mqtt-spy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-创建paho-mqtt-spy桌面图标"><span class="nav-number">8.</span> <span class="nav-text">(八) 创建paho.mqtt-spy桌面图标</span></a></li></ol></div>
             
 
           </div>
@@ -695,7 +708,7 @@
     
       <span class="post-meta-item-text">站点字数统计&#58;</span>
     
-    <span title="站点字数统计">565</span>
+    <span title="站点字数统计">2.4k</span>
   
 </div>
 
