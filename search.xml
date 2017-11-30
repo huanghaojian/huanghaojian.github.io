@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[部署Spring Boot应用程序,在后台运行]]></title>
+    <url>%2F2017%2F11%2F30%2F%E9%83%A8%E7%BD%B2Spring%20Boot%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%2C%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%2F</url>
+    <content type="text"><![CDATA[部署Spring Boot应用程序,Spring Boot应用可以制成init.d,sytemd服务,很方便的启动. 详情参考spring官网 (1) 制作“完全可执行”的jar用Maven创建一个“完全可执行”的jar，使用下面的插件配置：1234567&lt;plugin&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; &lt;configuration&gt; &lt;executable&gt;true&lt;/executable&gt; &lt;/configuration&gt;&lt;/plugin&gt; 使用Gradle123springBoot &#123; executable = true&#125; (2) 安装应用成init.d服务如果您已经配置了Spring Boot的Maven或Gradle插件来生成一个 完全可执行的jar，并且您没有使用自定义embeddedLaunchScript，那么您的应用程序可以用作init.d服务。创建软链到init.d，支持标准start，stop，restart和 status命令。12sudo ln -s /var/myapp/myapp.jar /etc/init.d/myappservice myapp start (3) 应用无法启动如果您的应用程序无法启动，请检查错误日志文件/var/log/myapp.log]]></content>
+      <categories>
+        <category>tutorial</category>
+      </categories>
+      <tags>
+        <tag>spring boot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Win10和Ubuntu的引导修复,Ubuntu引导Win10]]></title>
     <url>%2F2017%2F11%2F29%2FWin10%E5%92%8CUbuntu%E7%9A%84%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D-Ubuntu%E5%BC%95%E5%AF%BCWin10%2F</url>
     <content type="text"><![CDATA[1. Win10启动失败,bootmgr is missing(启动项管理器文件丢失)1.1 错误原因:1、重要系统文件丢失。 2、文件被病毒或恶意软件损坏或摧毁。 3、不适当的BIOS模拟等导致不能访问桌面环境。 4、不正确的重装系统或者是C盘系统奔溃。 5、系统盘符默认启动优先顺序错误。 1.2 解决方法:1、 如果Win10系统所在磁盘的盘符不是C,则修改成 2、 PE系统盘修复bootmgr (1) 插入PE系统盘也可以是U盘启动盘 (2) 选择分区工具 (3) 选中系统所在分区,标记此分区为活动分区,其他分区为逻辑分区 (4) 选中系统所在分区,点击硬盘选项,重建MBR 2. Ubuntu引导修复2.1 问题描述:由于在修复win10引导时损坏了Ubuntu的引导,导致电脑开机指显示一个J 2.2 解决方法:123456# 进入root用户sudo -i # 添加并更新add-apt-repository ppa:yannubuntu/boot-repair &amp;&amp; apt-get update＃ 安装boot-repair并启动软件apt-get install -y boot-repair &amp;&amp; boot-repair 在弹出界面中选择Recommend repair。 执行中 修复成功！ 3. Ubuntu引导Win103.1 重启电脑，在选择系统时，输入C，进入grub 3.2 查看Win10所在磁盘的信息123456# 查看所有硬盘grub&gt;ls (hd0) (hd0,msdos4) (hd0,msdos3) (hd0,msdos2) (hd0,msdos1) (hd1)...# 查看单个磁盘,可以根据你的磁盘大小来判断哪个是Win10盘grub&gt;ls (hd0,msdos1) 分区 hd0,msdos1 : 文件系统ntfs - Label &apos;XXXX&apos;,UUID XXXXXX - Partition start at 1024KiB - Total size XXXXXkiB 找到Win10所在盘的信息记录下（hd0，msdos1） UUID 2A74AC5774AC2791 3.3 进入Ubuntu，添加引导root用户下修改grub.cfg文件12sudo -ivim /boot/grub/grub.cfg 在文件末尾添加:123456menuentry &apos;Win10&apos; &#123; insmod ntfs set root=&lt;&apos;hd0,msdos1&apos;&gt; search –no-floppy –fs-uuid –set &lt;2A74AC5774AC2791&gt; chainloader +1&#125; 更新引导1grub-mkconfig -o /boot/grub/grub.cfg 3.4 重启电脑即可看见Win10的启动项]]></content>
+      <categories>
+        <category>tutorial</category>
+      </categories>
+      <tags>
+        <tag>bootmgr</tag>
+        <tag>grub</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Java服务端Cors跨域资源共享配置]]></title>
@@ -27,6 +45,9 @@
     <title><![CDATA[docker配置国内镜像加速器]]></title>
     <url>%2F2017%2F10%2F23%2Fdocker%E6%8D%A2%E6%BA%90%2F</url>
     <content type="text"><![CDATA[由于docker仓库在国外,所以导致访问速度慢,下载异常的问题.所以在国内最好还是换成国内源. Docker 官方提供的中国registry mirror 阿里云加速器 DaoCloud 加速器 下面用的是阿里云加速器: 注册用户并且申请加速器,会获得如 https://jxus37ad.mirror.aliyuncs.com 这样的地址。我们需要将其配置给Docker 引擎。 方法一:对于使用systemd的系统,用systemctl enable docker启用服务后,编辑/etc/systemd/system/multi-user.target.wants/docker.service 文件,找到ExecStart=这一行,在这行最后添加加速器地址--registry-mirror=&lt;加速器地址&gt;,如: 12ExecStart=/usr/bin/dockerd --registry-mirror=https://jxus37ad.mirror.aliyuncs.com 注:对于1.12以前的版本,dockerd换成docker daemon。 方法二: 针对Docker客户端版本大于1.10的用户您可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器： 12345678sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-&apos;EOF&apos;&#123; &quot;registry-mirrors&quot;: [&quot;https://f4e0xm4x.mirror.aliyuncs.com&quot;]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker]]></content>
+      <categories>
+        <category>tutorial</category>
+      </categories>
       <tags>
         <tag>docker</tag>
       </tags>
@@ -47,6 +68,9 @@
     <title><![CDATA[mosquitto安装、配置、测试、paho.mqtt-spy安装]]></title>
     <url>%2F2017%2F10%2F15%2Fmosquitto%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-paho-mqtt-spy%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[mosquitto是一款实现了消息推送协议 MQTT v3.1 的开源消息代理软件，提供轻量级的，支持可发布/可订阅的的消息推送模式，使设备对设备之间的短消息通信变得简单，比如现在应用广泛的低功耗传感器，手机、嵌入式计算机、微型控制器等移动设备。 (一) Ubuntu 安装 mosquitto1234apt-add-repository ppa:mosquitto-dev/mosquitto-ppaapt-get updateapt-get install mosquittoapt-get install mosquitto-clients (二) 修改/etc/mosquitto/mosquitto.conf123456789pid_file /var/run/mosquitto.pidpersistence truepersistence_location /var/lib/mosquitto/log_dest file /var/log/mosquitto/mosquitto.log# 将其他配置配置到此处方便管理include_dir /etc/mosquitto/conf.d (三) mosquitto配置文件[详细参考]安全配置 (/etc/mosquitto/conf.d/security.conf)1234567891011# =================================================================# Security# =================================================================# 禁止匿名用户访问allow_anonymous false# 用户密码配置文件,路径为绝对路径password_file /etc/mosquitto/pwdfile.example# 访问规则列表acl_file /etc/mosquitto/aclfile.example 访问规则列表配置 (/etc/mosquitto/aclfile.example)1234# 用户限制user &lt;username&gt;# 用户可以访问的topic和权限topic [read|write] &lt;topic&gt; (四) 新建用户12345# 用户格式为&lt;username&gt;:&lt;password&gt;# 第一次创建用户,再次创建会覆盖原文件mosquitto_passwd -c /etc/mosquitto/pwdfile.example &lt;userName&gt;# 新增用户mosquitto_passwd -U /etc/mosquitto/pwdfile.example &lt;userName&gt; (五) 启动服务123service mosquitto startormosquitto -c /etc/mosquitto/mosquitto.conf -d (六) 终端测试订阅 mosquitto_sub -t -u -P 1mosquitto_sub -t mqtt -u hao -P 123456 发布 mosquitto_pub -t -m -u -P 1mosquitto_pub -t mqtt -m message -u hao -P 123456 (七) paho.mqtt-spy图形化界面测试下载连接 https://github.com/eclipse/paho.mqtt-spy/releases/download/1.0.1-beta5/mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar 启动paho.mqtt-spy1java -jar mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jar (八) 创建paho.mqtt-spy桌面图标12vim ~/.local/share/applications/mqtt-spy.desktop# 添加以下内容 123456789[Desktop Entry]Version=1.0Name=mqtt-spyComment=mqtt-spyType=ApplicationCategories=Development;Exec=java -jar 安装目录/paho.mqtt-spy/jar/mqtt-spy-1.0.1-beta-b5-jar-with-dependencies.jarTerminal=falseIcon=安装目录/paho.mqtt-spy/mqtt-spy/src/main/resources/ui/images/mqtt-spy-logo.png]]></content>
+      <categories>
+        <category>tutorial</category>
+      </categories>
       <tags>
         <tag>mosquitto</tag>
         <tag>mqtt</tag>
